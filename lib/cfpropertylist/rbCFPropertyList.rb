@@ -76,6 +76,8 @@ module CFPropertyList
       return CFInteger.new(object)
     elsif(object.is_a?(Float)) then
       return CFReal.new(object)
+    elsif(object.is_a?(BigDecimal)) then
+      return CFReal.new(object)
     elsif(object.is_a?(TrueClass) || object.is_a?(FalseClass)) then
       return CFBoolean.new(object)
     elsif(object.is_a?(String)) then

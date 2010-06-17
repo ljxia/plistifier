@@ -457,7 +457,11 @@ module CFPropertyList
       elsif(value.is_a?(CFDictionary)) then
         cnt = 0
 
-        value.value.each_pair do |k,v|
+        value.value.each_pair do |k,v|          
+          if v.nil?
+            value.value.delete(k)
+            next
+          end
           cnt += 1
 
           if(!@unique_table.has_key?(k))

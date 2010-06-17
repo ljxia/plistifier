@@ -29,9 +29,9 @@ module ActionController
         else
           filename = "#{plist.class.name}-#{plist.id}"
         end
-        
+                
         send_data(
-          plist.to_plist(options),
+          plist,
           :type => Mime::PLIST, 
           :filename => "#{filename}.plist", 
           :disposition => 'inline'
