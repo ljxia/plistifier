@@ -21,9 +21,8 @@ end
 
 module ActionController
   class Base
-    def render_with_plist(options = nil, extra_options = {}, &block)
-      if plist = options[:plist]
-     
+    def render_with_plist(options = nil, extra_options = {}, &block)      
+      if options && options.is_a?(Hash) && plist = options[:plist]     
         if plist.is_a? Array
           filename = plist.first.class.name          
         else
@@ -36,7 +35,6 @@ module ActionController
           :filename => "#{filename}.plist", 
           :disposition => 'inline'
         )
-
       else
         render_without_plist(options, extra_options, &block) 
       end
