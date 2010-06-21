@@ -19,6 +19,25 @@ class Array
   end  
 end
 
+class Hash
+  def to_plist(options = {})
+    options[:plist_format] ||= CFPropertyList::List::FORMAT_BINARY 
+    
+    hash = {}
+    self.each_pair do |k,v|
+      if v.is_a? ActiveRecord::Base
+        hash[k] = v.to_hash(options)
+      else
+        hash[k] = v
+      end
+    end
+    
+    plist = CFPropertyList::List.new
+    plist.value = CFPropertyList.guess(hash)
+    plist.to_str(options[:plist_format])
+  end  
+end
+
 module ActionController
   class Base
     def render_with_plist(options = nil, extra_options = {}, &block)      
