@@ -52,7 +52,8 @@ module ActionController
           plist,
           :type => Mime::PLIST, 
           :filename => "#{filename}.plist", 
-          :disposition => 'inline'
+          :disposition => 'inline',
+          :status => options[:status]
         )
       else
         render_without_plist(options, extra_options, &block) 
