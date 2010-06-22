@@ -84,6 +84,8 @@ module CFPropertyList
       return CFString.new(object)
     elsif(object.is_a?(Time) || object.is_a?(DateTime)) then
       return CFDate.new(object)
+    elsif(object.is_a?(Date)) then
+      return CFDate.new(object.to_time)
     elsif(object.is_a?(IO)) then
       return CFData.new(object.read, CFData::DATA_RAW)
     elsif(object.is_a?(Array)) then

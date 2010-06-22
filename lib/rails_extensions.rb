@@ -42,19 +42,8 @@ module ActionController
   class Base
     def render_with_plist(options = nil, extra_options = {}, &block)      
       if options && options.is_a?(Hash) && plist = options[:plist]     
-        if plist.is_a? Array
-          filename = plist.first.class.name          
-        else
-          filename = "#{plist.class.name}-#{plist.id}"
-        end
-                
-        send_data(
-          plist,
-          :type => Mime::PLIST, 
-          :filename => "#{filename}.plist", 
-          :disposition => 'inline',
-          :status => options[:status]
-        )
+        response.content_type ||= Mime::PLSIT
+        render_for_text(plist, options[:status])
       else
         render_without_plist(options, extra_options, &block) 
       end
