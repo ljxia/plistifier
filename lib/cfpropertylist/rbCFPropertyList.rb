@@ -81,7 +81,11 @@ module CFPropertyList
     elsif(object.is_a?(TrueClass) || object.is_a?(FalseClass)) then
       return CFBoolean.new(object)
     elsif(object.is_a?(String)) then
-      return CFString.new(object)
+      if object.length > 255
+        return CFData.new(object, CFData::DATA_RAW)
+      else
+        return CFString.new(object)
+      end
     elsif(object.is_a?(Time) || object.is_a?(DateTime)) then
       return CFDate.new(object)
     elsif(object.is_a?(Date)) then
