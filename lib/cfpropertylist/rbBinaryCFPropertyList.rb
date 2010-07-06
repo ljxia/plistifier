@@ -7,6 +7,14 @@
 # Copyright:: Copyright (c) 2010
 # License::   Distributes under the same terms as Ruby
 
+class String
+  if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.8.7')
+    def bytesize      
+      self.length
+    end
+  end
+end
+
 module CFPropertyList
   class Binary
     # Read a binary plist file
