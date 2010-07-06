@@ -15,6 +15,14 @@ class String
   end
 end
 
+class Hash
+  if Gem::Version.new(RUBY_VERSION) < Gem::Version.new('1.8.7')
+    def count      
+      self.size
+    end
+  end
+end
+
 module CFPropertyList
   class Binary
     # Read a binary plist file
