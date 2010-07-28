@@ -25,7 +25,7 @@ In your PostController use for example:
 	  respond_to do |format|
 	    format.html # index.html.erb
 	    format.xml  { render :xml => @posts }
-	    format.plist { render :plist => @posts, :only => [:id, :title] }
+	    format.plist { render :plist => @posts.to_plist(:only => [:id, :title]) }
 	  end
 	end
 
@@ -39,12 +39,12 @@ In your PostController use for example:
 	  end
 	end
 	
-On the iPhone use for example:
-
+Basic example
 	NSURL *url = [NSURL URLWithString:@"http://example.com/posts.plist"];
 	NSArray *posts = [[NSArray alloc] initWithContentsOfURL:url];
 	NSLog(@"Title: %@", [[posts objectAtIndex:0] objectForKey:@"title"]);
-	
+
+On the iPhone I have categories that simplify the parsing of the plist data checkout http://github.com/pcrawfor/plistSerialization for usage.
 
 Thanks
 ======
@@ -55,5 +55,8 @@ to generate Plists.
 This plugin started as a copy of http://github.com/chuyeow/jsonifier/ I just changed it to
 support and added the CFPropertyList stuff.
 
+This plugin is a fork and extension of http://github.com/jeena/plistifier I've extended it to support parsing plist
+data in both directions I've also fixed several bugs with the property list data format serialization and the way request data was 
+built and sent.
 
-Copyright (c) 2010 Jeena Paradies, released under the MIT license
+Copyright (c) 2010 Paul Crawford, released under the MIT license
