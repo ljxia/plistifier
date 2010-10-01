@@ -42,7 +42,7 @@ module ActionController
   class Base
     def render_with_plist(options = nil, extra_options = {}, &block)      
       if options && options.is_a?(Hash) && plist = options[:plist]     
-        response.content_type ||= Mime::PLSIT
+        response.content_type ||= Mime::PLIST
         render_for_text(plist, options[:status])
       else
         render_without_plist(options, extra_options, &block) 
